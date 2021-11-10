@@ -3,8 +3,8 @@ main{
 }
 
 .video-box{
-    height: 90vh;
-    width: 95vw;
+    height: 90vh !important;
+    width: 95vw !important;
     border: solid white 1px;
     border-radius: 1rem;
 }
