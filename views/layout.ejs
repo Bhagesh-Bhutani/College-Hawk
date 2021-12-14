@@ -21,7 +21,70 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src = "https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        <% if(flash.success && flash.success.length > 0) { %>
+            new Noty({
+                text: `<%= flash.success %>`,
+                layout: 'topRight',
+                theme: 'relax',
+                type: 'success',
+                timeout: 2000
+            }).show();
+        <% } %>
+
+        <% if(flash.error && flash.error.length > 0) { %>
+            new Noty({
+                text: `<%= flash.error %>`,
+                layout: 'topRight',
+                theme: 'relax',
+                type: 'error',
+                timeout: 2000
+            }).show();
+        <% } %>
+        <% console.log(locals); %>
+        <% if(locals.swal && swal.success) { %>
+            Swal.fire({
+                title: 'Success!',
+                text: '<%= swal.success %>',
+                icon: 'success',
+                confirmButtonText: 'Cool'
+            });
+        <% } %>
+
+        <% if(locals.swal && swal.error) { %>
+            Swal.fire({
+                title: 'Error!',
+                text: '<%= swal.error %>',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            });
+        <% } %>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.8/firebase-app.min.js" integrity="sha512-Go2yj4d69XTY6tKbRLd1N4sc6k1VZKMSS8sbEAyX6PyAA0oyH7HLjmvOAM3bDVd++3YBR1E2qUvTD+UikMb6iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.8/firebase-database.min.js" integrity="sha512-gqOv3FMgD+neiM6/zzS8hRtxFfUL0+LNjjDvKb45AfvejvPEvmyKK4kOz7s7WUm1dWAeBqGcugyMtmHYfrazOw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.8/firebase-auth.min.js" integrity="sha512-aNv7ihg3HFT0Z4xwY8Iz5SLeE9RYzxosIK9dNdrBnl3+PjXrd9pWdNlIfbDQ9WjvQCUo7pVN32ttkyd7OSXPYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.2.8/firebase-storage.min.js" integrity="sha512-cD8OeZhnLn3M7tj3HM/d9eAPkuRJJ5pvFly2kR8tsMkguVCFZ+aQvo8v+ujTes5tFl/bCoBpbyLaY+Q/qI8Wow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA2zKC_VtvqFgSA1msE3GBFRItqOEZcX3E",
+            authDomain: "college-hawk-dev.firebaseapp.com",
+            projectId: "college-hawk-dev",
+            storageBucket: "college-hawk-dev.appspot.com",
+            messagingSenderId: "533364086085",
+            appId: "1:533364086085:web:bdb0c1112cfdd0d82f9a2c",
+            measurementId: "G-94X3SH8BFM"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <script src = "/js/layout.js"></script>
     <%- script %>
 </body>

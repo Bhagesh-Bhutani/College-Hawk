@@ -1,0 +1,9 @@
+<link rel="stylesheet" href = "/css/user_show_qrcode.css">
+
+<main>
+    <h2>QR Code for <%= user.name %></h2>
+    <br>
+    <img src = "<%= user.qrcode_url %>" alt="">
+    <br>
+    <p>An email was sent to <%= user.email %>, you can find the QR Code for entry/exit there as well.</p>
+</main>

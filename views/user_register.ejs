@@ -1,0 +1,48 @@
+<link rel="stylesheet" href = "/css/user_register.css">
+
+<main class = "col s12">
+    <h2>Registration Form</h2>
+
+    <form action = "/register" method = 'POST' class = "row">
+        <div class = "col s0 m1 l2 xl3">
+
+        </div>
+
+        <div class = "col s12 m10 l8 xl6">
+            <div class = "input-field">
+                <input id = "name" name = "name" class = "white-text" type = "text" class = "validate" required>
+                <label for = "name">Full Name</label>
+            </div>
+
+            <div class = "input-field">
+                <input id = "email" name = "email" class = "white-text" type = "email" class = "validate" required>
+                <label for = "email">Email-ID</label>
+            </div>
+            
+            <div class = "input-field">
+                <select name = "designation" required>
+                    <option value = "student" selected>Student</option>
+                    <option value = "faculty">Faculty</option>
+                </select>
+                <label>Designation</label>
+            </div>
+
+            <button id = "submit-btn" class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+
+            <div>
+
+            </div>
+        </div>
+
+        <div class = "col s0 m1 l2 xl3">
+
+        </div>
+    </form>
+</main>
+
+<div id = "qrcode" style = "visibility: hidden;"></div>
+
+<script src = "/js/qrcode.js"></script>
+<script src = "/js/register.js"></script>
