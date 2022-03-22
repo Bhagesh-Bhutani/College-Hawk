@@ -2,10 +2,11 @@
 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
 // the link to your model provided by Teachable Machine export panel
-const URL = '/json/mask_detection/';
+const URL = '/json/face_detection/';
 
 let model, webcam, labelContainer, maxPredictions;
-let countMaskOn = 0;
+let count = 0;
+let currentClass = '';
 
 // Load the image model and setup the webcam
 async function init() {
@@ -28,36 +29,17 @@ async function init() {
 
     // append elements to the DOM
     document.getElementById("webcam-container").appendChild(webcam.canvas);
-    // labelContainer = document.getElementById("label-container");
-    // for (let i = 0; i < maxPredictions; i++) { // and class labels
-    //     labelContainer.appendChild(document.createElement("div"));
-    // }
 }
 
 async function loop() {
     webcam.update(); // update the webcam frame
     await predict();
-    if(countMaskOn == 100){
-        window.location.href = '/face_detection'
+    if(count == 100){
+        window.location.href = '/qrcode'
         return;
     }
     window.requestAnimationFrame(loop);
 }
-
-// [
-//     {
-//         "className": "Mask On",
-//         "probability": 0.9911903738975525
-//     },
-//     {
-//         "className": "Mask Off",
-//         "probability": 0.008790425956249237
-//     },
-//     {
-//         "className": "No Human",
-//         "probability": 0.000019324068489368074
-//     }
-// ]
 
 // run the webcam image through the image model
 async function predict() {
@@ -67,27 +49,29 @@ async function predict() {
     let maxClass = '';
     let maxProbability = 0;
     for (let i = 0; i < maxPredictions; i++) {
-        // const classPrediction =
-        //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        // labelContainer.childNodes[i].innerHTML = classPrediction;
         if(prediction[i].probability > maxProbability){
             maxProbability = prediction[i].probability;
             maxClass = prediction[i].className;
         }
     }
 
-    if(maxClass == 'Mask On'){
-        countMaskOn++;
-        // if(countMaskOn == 1){
-            $('#detecting').text('Detecting... Please Wait!' + ` ${countMaskOn}%`);
-        // }
-    } else {
-        countMaskOn = 0;
-        $('#detecting').empty();
-    }
+    console.log(maxClass);
 
-    if(countMaskOn == 100){
-        console.log("Person Wearing Mask Found!");
+    if(maxClass == 'No Human'){
+        count = 0;
+        $('#detecting').text(`No Human Detected!`);
+    } else {
+        if(currentClass == maxClass){
+            count++;
+        } else {
+            currentClass = maxClass;
+            count = 0;
+        }
+        $('#detecting').text(`Detecting ${currentClass}... Please Wait!` + ` ${count}%`);
+    }
+    
+    if(count == 100){
+        console.log("Face Detected!");
     }
 }
 

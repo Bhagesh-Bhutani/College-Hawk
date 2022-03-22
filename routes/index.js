@@ -7,6 +7,8 @@ router.get('/', homeController.getHomePage);
 
 router.use('/register', require('./register'));
 
+router.use('/face_detection', require('./face_detection'));
+
 router.use('/qrcode', require('./qrcode'));
 
 router.use('/temperature', require('./temperature'));
